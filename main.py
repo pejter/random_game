@@ -11,12 +11,13 @@ from pytmx.util_pygame import load_pygame
 
 FPS = 60
 MOVEMENT_DELAY = 0.5
+MAP_FILE = 'map.tmx'
+PLAYER_IMAGE = 'player.png'
+
 
 # simple wrapper to keep the screen resizeable
 def init_screen(width, height):
-    # global temp_surface
     screen = pygame.display.set_mode((width, height), pygame.RESIZABLE)
-    # temp_surface = pygame.Surface((width / 2, height / 2)).convert()
     return screen
 
 
@@ -39,6 +40,7 @@ class Player(pygame.sprite.Sprite):
     def position(self, value):
         self._position = list(value)
         self.rect.topleft = self._position
+
 
 class Pathfinder(AStar):
     """A pathfinder class to implement moving in 2d space and a 'node' is just a (x,y) tuple that represents a reachable position"""
@@ -70,6 +72,7 @@ class Pathfinder(AStar):
 
 class RandomGame(object):
     """init the game, set up the screen and the map with the player"""
+
     def __init__(self, mapfile):
         self._move_queue = []
         self.running = False
@@ -87,14 +90,13 @@ class RandomGame(object):
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=2)
         self.map_layer.zoom = .5
 
-        self.player = Player('player.png')
+        self.player = Player(PLAYER_IMAGE)
         self.player.position = self.map_layer.map_rect.center
         # add the player to the group
         self.group.add(self.player)
 
         # initialize the nav mesh
         self.mesh = Pathfinder(map)
-
 
     def draw(self, surface):
         # center the map/screen on the player
@@ -118,7 +120,7 @@ class RandomGame(object):
 
                 if event.key == K_SPACE:
                     tile_position = tuple(map(operator.floordiv, self.player.position, self.map_layer.data.tile_size))
-                    self._move_queue = self.mesh.astar(tile_position, (5,5))
+                    self._move_queue = self.mesh.astar(tile_position, (5, 5))
                 # TODO: input move coordinates
 
             # this will be handled if the window is resized
@@ -162,7 +164,7 @@ if __name__ == "__main__":
     pygame.display.set_caption('Moving X on the desert')
 
     try:
-        game = RandomGame('map.tmx')
+        game = RandomGame(MAP_FILE)
         game.run()
     except:
         pygame.quit()
