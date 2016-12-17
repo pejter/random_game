@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" source="./desert.tsx"/>
+ <layer name="Ground" width="50" height="50" offsetx="130" offsety="-116">
+  <data encoding="base64" compression="zlib">
+   eJztmdtuwjAMhrNxsQPS2EEa29BYBhtjJ+D9n26uIKKy3Nap7SSIXXyirZLg34fEhalzbmrIFTACro2/x5IVoeOlALuONR6V7++BMfBgsL5PqOUEOAUGSF9O/z4CTxFMgAvgEhgqx2EtmP8KzCKYG+mIYdmi4w34At4T65DEgNIxZ8anhHgEFpl1eIHtG2Q/1vHjtnX8K9AhsY+yt60m8H2X/3HdxMZDoo2q5yWKR7ju0oHjZFEfwfdUzX+g+2B3bDxi60Pi/zawHsyn2+YNl2+DeDRxtuPc7XuINgbMcYFnJR3UvlNn5Pb9aPBdG0PmOGqeZTzGbt+P3gC3Hdwxx1HzLHVwayM13nX3xf5A9FB24jMvtd1Uzz8jnk0Yay0YsdJmtfvknj3hLMV6uvarVHB01PuaufL3a7Bm6qhs3+zGBh1U3yTBR47HdddXB4em2s+VV/U+E+sIfsR1kqreQ1/ap8e0smnZgFY8qByjYoCJ3csqm3HfZKmDWkcjjyQ6+vT8eA1fu6Zq2xPP+urI+Vuhpo5Utkh8J6lzC0rpabHvc/9+rRlzSt8/5fklVR3myu1Sav2YyLm3Y7T+gzkUv5TyHq5BVbsa73gWPrF899Syt1qHyn/K9pTv0lJizhLJudM2F+dmSedMqlh6dF/SXtsVS2y7FSEvuHt/n3zdCOY2ERvLP95RIww=
+  </data>
+ </layer>
+</map>
