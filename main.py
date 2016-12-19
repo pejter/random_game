@@ -74,7 +74,8 @@ class RandomGame(object):
     """init the game, set up the screen and the map with the player"""
 
     def __init__(self, mapfile):
-        self._move_queue = []
+        # create a double-ended queue to hold player path
+        self._move_queue = collections.deque()
         self.running = False
         self.last_position_update = 0
         map = load_pygame(mapfile)
@@ -120,7 +121,7 @@ class RandomGame(object):
 
                 if event.key == K_SPACE:
                     tile_position = tuple(map(operator.floordiv, self.player.position, self.map_layer.data.tile_size))
-                    self._move_queue = self.mesh.astar(tile_position, (5, 5))
+                    self._move_queue.extend(self.mesh.astar(tile_position, (5, 5)))
                 # TODO: input move coordinates
 
             # this will be handled if the window is resized
@@ -130,10 +131,10 @@ class RandomGame(object):
 
     def update(self, dt):
         """ Tasks that occur over time should be handled here"""
+        self.last_position_update += dt
         if self.last_position_update >= MOVEMENT_DELAY:
-            if self._move_queue != []:
-                self.player.position = list(map(operator.mul, self._move_queue[0], self.map_layer.data.tile_size))
-                del self._move_queue[0]
+            if self._move_queue.count() != 0:
+                self.player.position = list(map(operator.mul, self._move_queue.popleft(), self.map_layer.data.tile_size))
 
             self.last_position_update = 0
         # TODO: idle animations etc.
@@ -146,7 +147,6 @@ class RandomGame(object):
         try:
             while self.running:
                 dt = clock.tick(FPS) / 1000.
-                self.last_position_update += dt
                 self.handle_input()
                 self.update(dt)
                 self.draw(screen)
